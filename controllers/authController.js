@@ -4,24 +4,24 @@ import User from "../models/User.js";
 
 const signToken = (user) => 
     jwt.sign({
-        sub:user._id,
+        id:user._id,
         role:user.role,
         email:user.email,
-        name:user.name
+        name:user.username
     },process.env.JWT_SECRET,{
         expiresIn: process.env.JWT_EXPIRES
     });
 
 export const register = async (req,res) => {
     try {
-        const {name,email,password,role} = req.body;
+        const {username,email,password,role} = req.body;
 
         const exists = await User.findOne({email});
         if(exists) return res.status(409).json({message:"Email already registered"});
 
         const hash = await bcrypt.hash(password,10);
         const user = await User.create({
-            name,
+            username,
             email,
             password:hash,
             role

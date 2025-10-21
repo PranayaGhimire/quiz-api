@@ -8,7 +8,7 @@ export const protect = async (req,res,next) => {
         if (!token) return res.status(401).json({message:"Missing or invalid token"});
 
         const payload = jwt.verify(token,process.env.JWT_SECRET);
-        const user = await User.findById(payload.sub);
+        const user = await User.findById(payload.id);
         if (!user) return res.status(401).json({message:"User no longer exists"});
         req.user=user;
         next();

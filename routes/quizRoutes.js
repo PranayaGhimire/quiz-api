@@ -7,6 +7,6 @@ router.post("/",protect,allowRole,createQuiz);
 router.get("/",getQuizzes);
 router.get("/:id",getQuiz);
 router.post("/:id/submit",protect,submitQuiz);
-router.delete("/:id",protect,allowRole(),deleteQuiz);
+router.delete("/:id",protect,allowRole,deleteQuiz);
 
 export default router;

@@ -9,6 +9,15 @@ const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
+app.get("/", (req,res) => 
+    res.send(`
+            <h2>API Working Fine</h2>
+            <h3>API EndPoints:</h3>
+            <h4>/api/auth/register</h4>
+            <h4>/api/auth/login</h4>
+            <h4>/api/quizzes</h4>
+        `)
+)
 app.use("/api/auth",authRoutes);
 app.use("/api/quizzes",quizRoutes);
 mongoConnect();
